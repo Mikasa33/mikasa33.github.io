@@ -1,37 +1,175 @@
-<DOCTYPE html>
+<!DOCTYPE html>
 <html>
+
 <head>
-  <meta charset="utf-8">
-  <title>iOS 下载</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+  <meta name="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>下载App</title>
+  <script src="jquery-1.8.2.min.js"></script>
+  <style type="text/css">
+    body,
+    html {
+      margin: auto;
+      padding: 0;
+      text-align: center;
+      color: #ffffff;
+      height: 100%;
+      width: 100%;
+      max-width: 800px;
+    }
+
+    body #container {
+      display: block;
+      margin: auto;
+      max-width: 800px;
+      height: 100%;
+    }
+
+    a {
+      color: #ffffff;
+      text-decoration: none;
+    }
+
+    #name_and_des_div {
+      padding-top: 40px;
+      padding-bottom: 30px;
+      background-color: #00bdd1;
+    }
+
+    body h1 {
+
+      margin-left: auto;
+      margin-right: auto;
+      text-align: center;
+      padding: 20px;
+    }
+
+    body h2 {
+      margin-left: auto;
+      margin-right: auto;
+      text-align: center;
+    }
+
+    #download_btn {
+      margin-top: 100px;
+      color: #ffffff;
+      margin-left: auto;
+      margin-right: auto;
+      width: 70%;
+      height: 50px;
+      line-height: 50px;
+      text-align: center;
+      display: block;
+      background: #00bdd1;
+      -moz-border-radius: 25px;
+      -webkit-border-radius: 25px;
+      border-radius: 25px;
+    }
+
+    footer {
+      position: relative;
+      margin-top: -60px;
+      height: 60px;
+      width: 100%;
+      clear: both;
+    }
+
+    footer span {
+      display: block;
+      margin: auto;
+      text-align: center;
+      padding: 10px;
+      color: #a0a0a0;
+    }
+
+    .ljxr {
+      display: inline-block;
+      padding: 8px 36px;
+      border: 1px solid #5ebed2;
+      border-radius: 40px;
+      font-size: 14px;
+      background: #fff;
+      color: #32b2a7;
+    }
+  </style>
+
 </head>
-<script>
-  (function(doc,win){var docEl=doc.documentElement,resizeEvt="orientationchange" in window?"orientationchange":"resize",recalc=function(){var clientWidth=docEl.clientWidth;if(!clientWidth){return}docEl.style.fontSize=100*(clientWidth/750)+"px"};if(!doc.addEventListener){return}win.addEventListener(resizeEvt,recalc,false);doc.addEventListener("DOMContentLoaded",recalc,false)})(document,window);
-</script>
-<style>
-  *{
-    margin: 0;
-    padding: 0;
-  }
-  html,body{
-    width: 100%;
-    height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  p{
-    font-size: .3rem;
-    color: #333;
-    text-align: center;
-  }
-</style>
+
 <body>
-    <p>点击“安装”后，请按Home键至桌面查看安装进度</p>
- </body>
+  <div style="float:right;display:none;" id="tishi">
+    <img src="tishi.png" width="160">
+  </div>
+  <div id="container">
+    <div id="name_and_des_div">
+      <h1>COPC OA</h1>
+      <h2>IOS Android 客户端</h2>
+    </div>
+    <div id="button_str">
+      <a id="download_btn" href="javascript:void(0)" onclick="install()">下载</a>
+    </div>
+  </div>
+
+  <script type="text/javascript">
+    function loading() {
+      var u = navigator.userAgent;
+      var isiOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios终端
+      if (isiOS) {
+        $("#button_str").html(
+          "<a id=\"download_btn\" href=\"javascript:void(0)\" style='background:#ffffff;'><img src=\"loading.gif\"></a>"
+          );
+        setTimeout(function () {
+          $("#button_str").html(
+            "<a id=\"download_btn\" href=\"javascript:void(0)\" style='background:#ffffff;color:#5ebed2;font-size:18px;margin-top:20px'>正在安装，请按home键在桌面查看</a><a class=\"ljxr\" href=\"./static/cncomsinosoftcopc.mobileprovision\" style='margin-top: 20px;background:#ffffff;color:#5ebed2;font-size:18px'>立即信任</a><a id=\"download_btn\" style=\"margin-top:5px;background:#ffffff\" href=\"javascript:void(0)\"><img src=\"./static/jt.gif\" width=\"50px\"></a><a id=\"download_btn\" href=\"javascript:void(0)\" style='background:#ffffff;color:red;margin-top: 5px;'>首次安装，点击这里，进去信任</a><img src=\"./static/qyjyy.jpg\" width=300px>"
+            );
+        }, 3 * 1000); //延迟5000毫米
+      }
+      //$("#button_str").html("正在安装，请按home键在桌面查看");
+
+    }
+    var is_weixin = (function () {
+      var ua = navigator.userAgent.toLowerCase();
+      if (ua.match(/MicroMessenger/i) == "micromessenger") {
+        return true;
+      } else {
+        return false;
+      }
+    })();
+
+    var is_qq = (function () {
+      var ua = navigator.userAgent.toLowerCase();
+      if (ua.match(/QQ\//i) == "qq/") {
+        return true;
+      } else {
+        return false;
+      }
+    })();
+
+    function install() {
+
+      if (is_weixin || is_qq) {
+        document.getElementById("tishi").style.display = "";
+        alert("请在safari下或者浏览器打开此页面进行下载");
+      } else {
+        loading();
+        var u = navigator.userAgent;
+        var isAndroid = u.indexOf('Android') > -1 || u.indexOf('Adr') > -1; //
+        var isiOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios终端
+        if (isiOS || u.indexOf("Macintosh; Intel Mac OS") >= 0) {
+          window.location.href =
+            "itms-services://?action=download-manifest&url=https://mikasa33.github.io/static/archive.plist";
+        } else {
+          window.location.href = "http://127.0.0.1/static/apk.apk";
+        }
+      }
+    }
+    window.onload = function () {
+      if (is_weixin || is_qq) {
+        document.getElementById("tishi").style.display = "";
+        alert("请在safari下或者浏览器打开此页面进行下载");
+      }
+    }
+  </script>
+</body>
+
 </html>
-<script type="text/javascript">
-	 window.onload=function (){
-    window.location.href="itms-services://?action=download-manifest&url=https://mikasa33.github.io/archive.plist"
-}
-</script>
