@@ -6,7 +6,7 @@
 
   <meta name="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>下载App</title>
-  <script src="jquery-1.8.2.min.js"></script>
+  <script src="./static/jquery-1.8.2.min.js"></script>
   <style type="text/css">
     body,
     html {
@@ -98,7 +98,7 @@
 
 <body>
   <div style="float:right;display:none;" id="tishi">
-    <img src="tishi.png" width="160">
+    <img src="./static/tishi.png" width="160">
   </div>
   <div id="container">
     <div id="name_and_des_div">
@@ -116,7 +116,7 @@
       var isiOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios终端
       if (isiOS) {
         $("#button_str").html(
-          "<a id=\"download_btn\" href=\"javascript:void(0)\" style='background:#ffffff;'><img src=\"loading.gif\"></a>"
+          "<a id=\"download_btn\" href=\"javascript:void(0)\" style='background:#ffffff;'><img src=\"./static/loading.gif\"></a>"
           );
         setTimeout(function () {
           $("#button_str").html(
