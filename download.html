@@ -157,9 +157,9 @@
         var isiOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios终端
         if (isiOS || u.indexOf("Macintosh; Intel Mac OS") >= 0) {
           window.location.href =
-            "itms-services://?action=download-manifest&url=https://mikasa33.github.io/static/archive.plist";
+            "itms-services://?action=download-manifest&url=https://172.18.1.71/static/archive.plist";
         } else {
-          window.location.href = "http://127.0.0.1/static/apk.apk";
+          window.location.href = "./static/copc.apk";
         }
       }
     }
